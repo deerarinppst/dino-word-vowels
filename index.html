@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="เกมฝึกประสมพยัญชนะไทยกับสระสำหรับเด็ก">
+  <title>ไดโนจอมประสมคำ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+  <div class="world" aria-hidden="true">
+    <div class="sun"></div><div class="cloud cloud-one">☁</div><div class="cloud cloud-two">☁</div>
+    <div class="volcano"><span></span></div><div class="hill hill-one"></div><div class="hill hill-two"></div>
+  </div>
+
+  <header class="topbar">
+    <button class="brand plain-button" id="homeButton" aria-label="กลับหน้าหลัก">
+      <span class="brand-mark">🦕</span><span>ไดโนจอมประสมคำ</span>
+    </button>
+    <div class="top-actions">
+      <button class="round-button" id="soundButton" aria-pressed="true" title="เปิดหรือปิดเสียง"><span aria-hidden="true">🔊</span><span class="sr-only">เปิดเสียงอยู่</span></button>
+      <button class="round-button reset-button" id="resetButton" title="รีเซ็ตความคืบหน้า"><span aria-hidden="true">↻</span><span class="sr-only">รีเซ็ตความคืบหน้า</span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="screen home-screen active" id="homeScreen" aria-labelledby="gameTitle">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">ผจญภัย • ฝึกอ่าน • เก็บดาว</div>
+          <h1 id="gameTitle">ไดโนจอม<br><span>ประสมคำ</span></h1>
+          <p>ออกสำรวจดินแดนสระไทยไปกับ “น้องไดโน่”<br>ฝึกเขียน ฝึกอ่าน แล้วเก็บดาวให้ครบทุกด่าน!</p>
+          <button class="primary-button start-button" id="startButton"><span aria-hidden="true">▶</span> เริ่มเล่น</button>
+        </div>
+        <div class="mascot-wrap">
+          <div class="speech-bubble">มาประสมคำ<br>กันเถอะ!</div>
+          <img src="assets/dino-mascot.png" alt="น้องไดโน่ ไดโนเสาร์สีเขียวถือดินสอและโบกมือ">
+          <span class="fern fern-left">🌿</span><span class="fern fern-right">🌱</span>
+        </div>
+      </div>
+
+      <section class="map-section" id="levelMap" aria-labelledby="mapTitle">
+        <div class="section-heading">
+          <div><span class="kicker">แผนที่การผจญภัย</span><h2 id="mapTitle">เลือกด่านที่อยากฝึก</h2></div>
+          <div class="total-stars"><span aria-hidden="true">⭐</span><strong id="totalStars">0</strong><small>/ 24 ดาว</small></div>
+        </div>
+        <div class="level-grid" id="levelGrid"></div>
+      </section>
+      <div class="privacy-note"><span aria-hidden="true">🛡️</span> ปลอดภัยสำหรับเด็ก • ไม่มีโฆษณา • ไม่ต้องสมัครสมาชิก</div>
+    </section>
+
+    <section class="screen play-screen" id="playScreen" aria-labelledby="lessonTitle">
+      <div class="game-shell">
+        <div class="lesson-header">
+          <button class="back-button" id="backToMap"><span aria-hidden="true">←</span> เลือกด่าน</button>
+          <div class="lesson-name"><span id="lessonIcon">🥚</span><div><small>กำลังผจญภัย</small><h2 id="lessonTitle">ด่านสระอะ</h2></div></div>
+          <div class="game-stars" aria-label="ดาวในด่านนี้"><span>⭐</span><strong id="currentStars">0</strong></div>
+        </div>
+        <div class="progress-meta"><span id="questionCount">ข้อ 1 จาก 7</span><strong id="progressPercent">0%</strong></div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressBar"></span></div>
+
+        <div class="question-card" id="questionCard" tabindex="0" role="button" aria-label="แตะเพื่อเปิดพื้นที่เขียนคำตอบ">
+          <span class="leaf-decoration">🌿</span>
+          <div class="question-label">ประสมคำนี้ให้ถูกต้อง</div>
+          <div class="equation" id="equation"><span>ก</span><b>+</b><span>ะ</span><b>=</b><span class="blank">____</span></div>
+          <button class="speak-button" id="speakQuestion"><span aria-hidden="true">🔊</span> ฟังเสียงโจทย์</button>
+        </div>
+
+        <div class="answer-panel">
+          <button class="draw-button" id="openDraw"><span class="pencil-icon">✏️</span><span><strong>เขียนคำตอบ</strong><small>ใช้นิ้วหรือปากกาก็ได้</small></span></button>
+          <p class="write-only-note">เขียนคำตอบด้วยนิ้วหรือปากกา แล้วกด “เขียนเสร็จแล้ว”</p>
+          <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+          <div class="game-actions">
+            <button class="secondary-button" id="laterButton">ไว้ทำทีหลัง</button>
+            <button class="primary-button next-button" id="nextButton" disabled>ข้อต่อไป <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen result-screen" id="resultScreen" aria-labelledby="resultTitle">
+      <div class="result-card">
+        <div class="confetti" aria-hidden="true">★　●　▲　★　●</div>
+        <img src="assets/dino-mascot.png" alt="" class="result-dino">
+        <span class="result-kicker">ผ่านด่านแล้ว!</span>
+        <h2 id="resultTitle">ยอดเยี่ยมมาก นักผจญภัย!</h2>
+        <p id="resultSubtitle">ฝึกครบทุกคำในด่านสระอะแล้ว</p>
+        <div class="big-stars" id="resultStars" aria-label="ดาวที่ได้รับ">⭐⭐⭐</div>
+        <div class="score-grid">
+          <div><span>✅</span><strong id="correctScore">7 / 7</strong><small>ตอบถูก</small></div>
+          <div><span>⭐</span><strong id="earnedStars">3 ดาว</strong><small>ดาวที่ได้รับ</small></div>
+        </div>
+        <div class="result-actions">
+          <button class="primary-button" id="replayButton">🔁 เล่นอีกครั้ง</button>
+          <button class="secondary-button" id="chooseLevelButton">🗺️ เลือกด่านอื่น</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="draw-dialog" id="drawDialog" aria-labelledby="drawTitle">
+    <div class="dialog-header">
+      <div><span>พื้นที่ฝึกเขียน</span><h2 id="drawTitle">เขียนคำตอบของหนู</h2></div>
+      <button class="close-button" id="closeDraw" aria-label="ปิดหน้าต่างเขียน">×</button>
+    </div>
+    <div class="dialog-body">
+      <div class="dialog-question"><span>โจทย์</span><strong id="dialogEquation">ก + ะ = ____</strong></div>
+      <p class="canvas-hint">เขียนคำตอบในกรอบด้านล่างด้วยนิ้วหรือปากกา</p>
+      <div class="canvas-wrap"><canvas id="drawCanvas" tabindex="0" aria-label="พื้นที่เขียนคำตอบด้วยนิ้ว เมาส์ หรือปากกา"></canvas><span class="canvas-placeholder" id="canvasPlaceholder">เขียนตรงนี้ได้เลย ✏️</span></div>
+      <div class="canvas-tools">
+        <button id="undoStroke">↶ ย้อนกลับเส้นล่าสุด</button>
+        <button id="clearCanvas">🧽 ล้างแล้วเขียนใหม่</button>
+      </div>
+      <button class="check-button finish-writing-button" id="finishWriting">เขียนเสร็จแล้ว ✓</button>
+      <div class="dialog-feedback" id="dialogFeedback" role="status" aria-live="polite"></div>
+    </div>
+  </dialog>
+
+  <dialog class="confirm-dialog" id="resetDialog" aria-labelledby="resetTitle">
+    <div class="confirm-icon">🥚</div><h2 id="resetTitle">เริ่มการผจญภัยใหม่?</h2>
+    <p>ดาวและความคืบหน้าทั้งหมดจะถูกล้างออก</p>
+    <div><button class="secondary-button" id="cancelReset">ยังไม่รีเซ็ต</button><button class="danger-button" id="confirmReset">รีเซ็ตเลย</button></div>
+  </dialog>
+
+  <div class="celebration" id="celebration" aria-hidden="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
